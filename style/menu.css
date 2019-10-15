@@ -1,0 +1,54 @@
+#menu {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    top: -9vh;
+    left: 1vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+    transition: all 200ms ease-in-out;
+}
+
+.bar {
+    width: 40px;
+    height: 5px;
+    background: black;
+    transition: ease-in-out all 300ms;
+}
+
+#barOne {
+    position: absolute;
+    top: 0px;
+}
+
+#barTwo {
+    position: absolute;
+    top: 15px;
+}
+
+#barThree {
+    position: absolute;
+    top: 30px;
+}
+
+.goToMiddle {
+    top: 15px !important;
+    background: white;
+}
+
+.hide {
+    display: none;
+}
+
+.turnLeft {
+    transform: rotateZ(45deg);
+    width: 40px;
+}
+
+.turnRight {
+    transform: rotateZ(-45deg);
+    width: 40px;
+}
