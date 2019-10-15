@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hausruckhof</title>
+    <link rel="stylesheet" href="./style/menu.css">
+    <link rel="stylesheet" href="./style/main.css">
+    <link rel="stylesheet" href="./style/room.css">
+    <link rel="stylesheet" href="./style/logIn.css">
+    <link rel="stylesheet" href="./style/loading.css">
+    <link rel="stylesheet" href="./style/children.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <script src="./script/menu.js"></script>
+    <script src="./script/script.js"></script>
+    <script src="./script/hammer.min.js"></script>
+</head>
+<body>
+    <nav id="nav">
+        <!-- <p id="usernameField"></p> -->
+
+        <ul>
+            <li id="childrenNav">Kinder</li>
+            <li id="roomPlaningNav">Zimmer Einteilung</li>
+            <li>Reitplan</li>
+            <li>Feedbackfragebögen</li>
+            <li>Account</li>
+        </ul>
+
+        <i class="fas fa-sign-out-alt" id="signOut"></i>
+
+        <span>© Copyright by Jonas Dorfinger</span>
+    </nav>
+
+    <div id="menu">
+        <div class="bar" id="barOne"></div>
+        <div class="bar" id="barTwo"></div>
+        <div class="bar" id="barThree"></div>
+    </div>
+
+    <div id="contentWrapper">
+        <div id="logInScreen">
+            <div id="logInWrapper">
+                <div id="inputWrapper">
+                    <input type="text" id="username" value="admin" placeholder="Benutzername">
+                    <input type="password" id="password" value="admi123" placeholder="Passwort">
+                </div>
+
+                <div id="buttonWrapper">
+                    <div class="button" id="logInBtn">Anmelden</div>
+                </div>
+            </div>
+
+            <p id="errorField" class="error"> &nbsp; </p>
+
+            <div id="loader" class="hide">
+                    <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+            </div>
+        </div>
+
+        <div id="childrenScreen" class="hideOverflow"></div>
+
+        <div id="detailedChildrenScreen"></div>
+
+        <div id="childrenRidingPlanScreen">
+            <h2>hier wird der Reitplan des ausgewählten kindes ansehbar sein</h2>
+        </div>
+
+        <div id="roomPlaningScreen"></div>
+
+        <div id="roomsScreen"></div>
+    </div>
+</body>
+</html>
