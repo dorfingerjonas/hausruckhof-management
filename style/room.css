@@ -1,0 +1,56 @@
+.newRoom {
+    width: 90vw;
+    padding: 0 5vw;
+}
+
+.roomHeader {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 6vmin;
+}
+
+.roomHeader h2, .roomHeader p {
+    margin: 0;
+}
+
+.roomInfo {
+    border-bottom: rgba(0, 0, 0, 0.507) 1px solid;
+}
+
+.roomInfo i, .childrenToAdd i {
+    font-size: 6vmin;
+}
+
+.roomInfo ul, .childrenToAdd ul {
+    padding: 0;
+    margin-bottom: 2vh;
+}
+
+.roomInfo ul p, .childrenToAdd ul p {
+    margin: 0;
+}
+
+.roomInfo ul li, .childrenToAdd ul li {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 2vh 0;
+}
+
+.roomInfo ul li .iconWrapper, .childrenToAdd ul li .iconWrapper{
+    width: 20vmin;
+    display: flex;
+    justify-content: space-between;
+}
+
+.roomInfoFirstLine {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
