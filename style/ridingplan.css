@@ -1,0 +1,15 @@
+.selectionHorse {
+    width: 90vw;
+    height: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:  0 5vw;
+    border-color: black;;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.selectionHorse p, .detailedHorseRow p {
+    margin: 0;
+}
