@@ -16,16 +16,15 @@
 }
 
 .icon {
-    /* transform: rotateZ(-90deg); */
     font-size: 7vmin;
 }
 
 .firstChild {
-    border-top: 2.5px solid;
+    border-top: 2.5px solid !important;
 }
 
 .lastChild {
-    border-bottom: 2.5px solid;
+    border-bottom: 2.5px solid !important;
 }
 
 /* Detailed List */
