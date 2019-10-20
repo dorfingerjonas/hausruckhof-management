@@ -10,6 +10,12 @@ window.addEventListener('load', () => {
     // Nav
     const childrenNav = document.getElementById('childrenNav');
     const roomPlaning = document.getElementById('roomPlaningNav');
+    const ridingPlanNav = document.getElementById('ridingPlanNav');
+
+    // Delete
+    document.getElementById('back').addEventListener('click', () => {
+        changeScreen(false);
+    });
 
     roomPlaning.addEventListener('click', () => {
         goToSpecificScreen(4);
@@ -21,27 +27,32 @@ window.addEventListener('load', () => {
         menu.click();
     });
 
+    ridingPlanNav.addEventListener('click', () => {
+        goToSpecificScreen(6);
+        menu.click();
+    });
+
     const children = [
         {
-            parentsEmail: 'mustereltern@mail.com', street: 'Musterstraße 1', plzAndPlace: '4040, Linz', phonenumbers: [{owner: 'Mutter', number: '01234/12345678'}, {owner: 'Vater', number: '09876/98765432'}], 
+            parentsEmail: 'mustereltern@mail.com', street: 'Musterstraße 1', plzAndPlace: '4040, Linz', phonenumbers: [{owner: 'Mutter', number: '01234/12345678'}, {owner: 'Vater', number: '09876/98765432'}], takenExtraLessons: 1,
             name: 'Max Mustermann', birthdate: '01.01.2000', gender: 'männlich', groupNumber: 4, packageNumber: 4, svnr: '5839-030206', extraLessonsAllowed: true, maxExtraLessons: 3, poolAllowed: false, roomNumber: -1,
             picture: true, picturePayed: false, allergen: 'Laktose, Nuss', vegetarian: false, vegan: false, extraDay: false, foRiding: true, afRiding: true, jumping: true, dressur: false, note: 'könnte auch reiterpass reiten'
         },
 
         {
-            parentsEmail: 'mustereltern@mail.com', street: 'Musterstraße 1', plzAndPlace: '4040, Linz', phonenumbers: [{owner: 'Mutter', number: '01234/12345678'}, {owner: 'Vater', number: '09876/98765432'}], 
+            parentsEmail: 'mustereltern@mail.com', street: 'Musterstraße 1', plzAndPlace: '4040, Linz', phonenumbers: [{owner: 'Mutter', number: '01234/12345678'}, {owner: 'Vater', number: '09876/98765432'}], takenExtraLessons: 3,
             name: 'Martina Musterfrau', birthdate: '02.01.2000', gender: 'weiblich', groupNumber: 4, packageNumber: 3, svnr: '5839-030602', extraLessonsAllowed: true, maxExtraLessons: 3, poolAllowed: false, roomNumber: -1,
             picture: true, picturePayed: false, allergen: 'Soja, Gluten', vegetarian: true, vegan: true, extraDay: false, foRiding: true, afRiding: true, jumping: true, dressur: false, note: 'könnte auch reiterpass reiten'
         },
 
         {
-            parentsEmail: 'mustereltern@mail.com', street: 'Musterstraße 1', plzAndPlace: '4040, Linz', phonenumbers: [{owner: 'Mutter', number: '01234/12345678'}, {owner: 'Vater', number: '09876/98765432'}], 
+            parentsEmail: 'mustereltern@mail.com', street: 'Musterstraße 1', plzAndPlace: '4040, Linz', phonenumbers: [{owner: 'Mutter', number: '01234/12345678'}, {owner: 'Vater', number: '09876/98765432'}], takenExtraLessons: 0,
             name: 'Roman Mählich', birthdate: '03.01.2000', gender: 'männlich', groupNumber: 4, packageNumber: 2, svnr: '5839-030601', extraLessonsAllowed: true, maxExtraLessons: 3, poolAllowed: false, roomNumber: -1,
             picture: true, picturePayed: false, allergen: 'Eiweiß', vegetarian: true, vegan: false, extraDay: false, foRiding: true, afRiding: true, jumping: true, dressur: false, note: 'könnte auch reiterpass reiten'
         },
 
         {
-            parentsEmail: 'mustereltern@mail.com', street: 'Musterstraße 1', plzAndPlace: '4040, Linz', phonenumbers: [{owner: 'Mutter', number: '01234/12345678'}, {owner: 'Vater', number: '09876/98765432'}], 
+            parentsEmail: 'mustereltern@mail.com', street: 'Musterstraße 1', plzAndPlace: '4040, Linz', phonenumbers: [{owner: 'Mutter', number: '01234/12345678'}, {owner: 'Vater', number: '09876/98765432'}], takenExtraLessons: 2,
             name: 'Martin Fischer', birthdate: '04.01.2000', gender: 'männlich', groupNumber: 4, packageNumber: 1, svnr: '5839-030600', extraLessonsAllowed: true, maxExtraLessons: 3, poolAllowed: false, roomNumber: -1,
             picture: true, picturePayed: false, allergen: 'Laktose', vegetarian: false, vegan: true, extraDay: false, foRiding: true, afRiding: true, jumping: true, dressur: false, note: 'könnte auch reiterpass reiten'
         },
@@ -61,9 +72,21 @@ window.addEventListener('load', () => {
         {number: 11, capacity: 4, unusedBeds: 4, children: []},
     ];
 
+    const horses = [
+        {name: 'Bounty', id: 'A1', timetable: []},
+        {name: 'Sonny', id: 'A2', timetable: []},
+        {name: 'Pico', id: 'A3', timetable: []},
+        {name: 'Pegasus', id: 'A4', timetable: []},
+        {name: 'Maestro', id: 'A5', timetable: []},
+        {name: 'Blacky', id: 'A6', timetable: []},
+        {name: 'Happy', id: 'A7', timetable: []},
+        {name: 'Jumper', id: 'A8', timetable: []},
+    ];
+
     printChildrenList(children);
     printRoomList(rooms);
     printDetailedRoomList(rooms, true, children);
+    printHorseList(horses);
 
     if (loggedIn === null) {
         localStorage.setItem('loggedIn', false);
@@ -296,14 +319,14 @@ window.addEventListener('load', () => {
             let edit = document.createElement('i');
 
             if (hasWritePermission) {
-                edit.setAttribute('class', 'fas fa-edit edit');
-
+                edit.setAttribute('class', 'fas fa-pencil-alt edit');
+                
                 edit.addEventListener('click', () => {
-                    if (edit.className.includes('fa-edit')) {
+                    if (edit.className.includes('fa-pencil-alt')) {
                         edit.style.opacity = 0;
                         
                         setTimeout(() => {
-                            edit.classList.remove('fa-edit');
+                            edit.classList.remove('fa-pencil-alt');
                             edit.classList.add('fa-check');
                             edit.style.opacity = 1;
                         }, 310);
@@ -321,7 +344,7 @@ window.addEventListener('load', () => {
                         edit.style.opacity = 0;
 
                         setTimeout(() => {
-                            edit.classList.add('fa-edit');
+                            edit.classList.add('fa-pencil-alt');
                             edit.classList.remove('fa-check');
                             edit.style.opacity = 1;
                         }, 310);
@@ -399,6 +422,12 @@ window.addEventListener('load', () => {
                     const icon = document.createElement('i');
                     icon.setAttribute('class', 'material-icons icon');
                     icon.textContent = 'keyboard_arrow_right';
+
+                    const ridingHammer = new Hammer(newRow);
+
+                    ridingHammer.on('swipeleft', () => {
+                        changeScreen(true);                    
+                    });
                     
                     newRow.appendChild(text);
                     newRow.appendChild(icon);
@@ -674,7 +703,7 @@ window.addEventListener('load', () => {
                     document.getElementById(`PersonCounter${room.number}`).textContent = `${parseInt(currentState[0]) + 1}/${room.capacity}`;
                 });
 
-                iconWrapper.appendChild(add);
+                if (hasWritePermission) iconWrapper.appendChild(add);
                 iconWrapper.appendChild(gender);
                 li.appendChild(name);
                 li.appendChild(iconWrapper);
@@ -704,7 +733,7 @@ window.addEventListener('load', () => {
                     document.getElementById(`PersonCounter${room.number}`).textContent = `${parseInt(currentState[0]) -1}/${room.capacity}`;
                 });
 
-                iconWrapper.appendChild(remove);
+                if (hasWritePermission) iconWrapper.appendChild(remove);
                 iconWrapper.appendChild(gender);
                 li.appendChild(name);
                 li.appendChild(iconWrapper);
@@ -719,6 +748,68 @@ window.addEventListener('load', () => {
             newRoom.appendChild(roomInfos);
             newRoom.appendChild(childrenToAdd);
             contentWrapper.appendChild(newRoom);
+        }
+    }
+
+    function printHorseList(horses) {
+        const contentWrapper = document.getElementById('ridingPlan');
+
+        for (let i = 0; i < horses.length; i++) {
+            const horse = horses[i];
+
+            const newHorse = document.createElement('div');
+            const name = document.createElement('p');
+            const icon = document.createElement('i');
+
+            name.textContent = horse.name;
+            icon.setAttribute('class', 'material-icons icon');
+            icon.textContent = 'keyboard_arrow_right';
+
+            newHorse.setAttribute('class', 'selectionHorse');
+
+            if (i === 0) newHorse.classList.add('firstChild');
+            else if (i === horses.length - 1) newHorse.classList.add('lastChild');
+
+            const hammer = new Hammer(newHorse);
+
+            hammer.on('swipeleft', () => {
+                newHorse.click();
+            });
+
+            newHorse.addEventListener('click', () => {
+                const detailedRidingPlan = document.getElementById('detailedRidingPlan');
+
+                goToSpecificScreen(7);
+                detailedRidingPlan.childNodes[i].classList.remove('hide');
+            });
+            
+            newHorse.appendChild(name);
+            newHorse.appendChild(icon);
+            contentWrapper.appendChild(newHorse);
+        }
+    }
+
+    function printDetailedHorseList(horses, hasWritePermission, children) {
+        const contentWrapper = document.getElementById('detailedRidingPlan');
+
+        for (let i = 0; i < horses; i++) {
+            const horse = horses[i];
+
+            const newDetailedHorse = document.createElement('div');
+            
+            // create Headline
+            const headline = document.createElement('div');
+            const horseName = document.createElement('h2');
+            horseName.textContent = horse.name;
+
+            headline.appendChild(horseName);
+
+            // create Session Selection
+            for (let i = 1; i <= 7; i++) {
+                const dayRow = document.createElement('div');
+
+                               
+            }
         }
     }
 
