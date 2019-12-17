@@ -2,15 +2,19 @@ window.addEventListener('load', () => {
     const detailedHammer = new Hammer(document.getElementById('detailedChildrenScreen'));
     const roomPlaningHammer = new Hammer(document.getElementById('roomPlaningScreen'));
     const roomHammer = new Hammer(document.getElementById('roomsScreen'));
+    const horseListHammer = new Hammer(document.getElementById('ridingPlan'));
+    const sendFeedBackHammer = new Hammer(document.getElementById('sendFeedbackScreen'));
     const signInBtn = document.getElementById('logInBtn');
     const signOut = document.getElementById('signOut');
     const menu = document.getElementById('menu');
+    const headline = document.querySelector('#headline');
     let loggedIn = localStorage.getItem('loggedIn');
     let currentScreen = 0;
     // Nav
     const childrenNav = document.getElementById('childrenNav');
     const roomPlaning = document.getElementById('roomPlaningNav');
     const ridingPlanNav = document.getElementById('ridingPlanNav');
+    const feedBackNav = document.getElementById('feedBackNav');
 
     // Delete
     document.getElementById('back').addEventListener('click', () => {
@@ -20,74 +24,92 @@ window.addEventListener('load', () => {
     roomPlaning.addEventListener('click', () => {
         goToSpecificScreen(4);
         menu.click();
+        changeHeadline('Zimmer Einteilung');
     });
 
     childrenNav.addEventListener('click', () => {
         goToSpecificScreen(1);
         menu.click();
+        changeHeadline('Kinder');
     });
 
     ridingPlanNav.addEventListener('click', () => {
         goToSpecificScreen(6);
         menu.click();
+        changeHeadline('Reitplan');
     });
 
-    const children = [
-        {
-            parentsEmail: 'mustereltern@mail.com', street: 'Musterstraße 1', plzAndPlace: '4040, Linz', phonenumbers: [{owner: 'Mutter', number: '01234/12345678'}, {owner: 'Vater', number: '09876/98765432'}], takenExtraLessons: 1,
-            name: 'Max Mustermann', birthdate: '01.01.2000', gender: 'männlich', groupNumber: 4, packageNumber: 4, svnr: '5839-030206', extraLessonsAllowed: true, maxExtraLessons: 3, poolAllowed: false, roomNumber: -1,
-            picture: true, picturePayed: false, allergen: 'Laktose, Nuss', vegetarian: false, vegan: false, extraDay: false, foRiding: true, afRiding: true, jumping: true, dressur: false, note: 'könnte auch reiterpass reiten'
-        },
+    feedBackNav.addEventListener('click', () => {
+        goToSpecificScreen(8);
+        menu.click();
+        changeHeadline('Feedbackfragebögen');
+    });
 
-        {
-            parentsEmail: 'mustereltern@mail.com', street: 'Musterstraße 1', plzAndPlace: '4040, Linz', phonenumbers: [{owner: 'Mutter', number: '01234/12345678'}, {owner: 'Vater', number: '09876/98765432'}], takenExtraLessons: 3,
-            name: 'Martina Musterfrau', birthdate: '02.01.2000', gender: 'weiblich', groupNumber: 4, packageNumber: 3, svnr: '5839-030602', extraLessonsAllowed: true, maxExtraLessons: 3, poolAllowed: false, roomNumber: -1,
-            picture: true, picturePayed: false, allergen: 'Soja, Gluten', vegetarian: true, vegan: true, extraDay: false, foRiding: true, afRiding: true, jumping: true, dressur: false, note: 'könnte auch reiterpass reiten'
-        },
+    const xhttpChildren = new XMLHttpRequest();
+    xhttpChildren.open('POST', './php/getData.php', true);
+    xhttpChildren.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttpChildren.send('req=children');
 
-        {
-            parentsEmail: 'mustereltern@mail.com', street: 'Musterstraße 1', plzAndPlace: '4040, Linz', phonenumbers: [{owner: 'Mutter', number: '01234/12345678'}, {owner: 'Vater', number: '09876/98765432'}], takenExtraLessons: 0,
-            name: 'Roman Mählich', birthdate: '03.01.2000', gender: 'männlich', groupNumber: 4, packageNumber: 2, svnr: '5839-030601', extraLessonsAllowed: true, maxExtraLessons: 3, poolAllowed: false, roomNumber: -1,
-            picture: true, picturePayed: false, allergen: 'Eiweiß', vegetarian: true, vegan: false, extraDay: false, foRiding: true, afRiding: true, jumping: true, dressur: false, note: 'könnte auch reiterpass reiten'
-        },
+    let children = [];
 
-        {
-            parentsEmail: 'mustereltern@mail.com', street: 'Musterstraße 1', plzAndPlace: '4040, Linz', phonenumbers: [{owner: 'Mutter', number: '01234/12345678'}, {owner: 'Vater', number: '09876/98765432'}], takenExtraLessons: 2,
-            name: 'Martin Fischer', birthdate: '04.01.2000', gender: 'männlich', groupNumber: 4, packageNumber: 1, svnr: '5839-030600', extraLessonsAllowed: true, maxExtraLessons: 3, poolAllowed: false, roomNumber: -1,
-            picture: true, picturePayed: false, allergen: 'Laktose', vegetarian: false, vegan: true, extraDay: false, foRiding: true, afRiding: true, jumping: true, dressur: false, note: 'könnte auch reiterpass reiten'
-        },
-    ];
+    xhttpChildren.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            children = JSON.parse(this.responseText);
 
-    const rooms = [
-        {number: 1, capacity: 6, unusedBeds: 6, children: []},
-        {number: 2, capacity: 2, unusedBeds: 2, children: []},
-        {number: 3, capacity: 4, unusedBeds: 4, children: []},
-        {number: 4, capacity: 4, unusedBeds: 4, children: []},
-        {number: 5, capacity: 4, unusedBeds: 4, children: []},
-        {number: 6, capacity: 4, unusedBeds: 4, children: []},
-        {number: 7, capacity: 2, unusedBeds: 2, children: []},
-        {number: 8, capacity: 2, unusedBeds: 2, children: []},
-        {number: 9, capacity: 2, unusedBeds: 2, children: []},
-        {number: 10, capacity: 6, unusedBeds: 6, children: []},
-        {number: 11, capacity: 4, unusedBeds: 4, children: []},
-    ];
+            for (let i = 0; i < children.length; i++) {   
+                const child = children[i];
 
-    const horses = [
-        {name: 'Bounty', id: 'A1', timetable: []},
-        {name: 'Sonny', id: 'A2', timetable: []},
-        {name: 'Pico', id: 'A3', timetable: []},
-        {name: 'Pegasus', id: 'A4', timetable: []},
-        {name: 'Maestro', id: 'A5', timetable: []},
-        {name: 'Blacky', id: 'A6', timetable: []},
-        {name: 'Happy', id: 'A7', timetable: []},
-        {name: 'Jumper', id: 'A8', timetable: []},
-    ];
+                children[i] = {
+                    parentsEmail: child[0], street: child[1], plzAndPlace: child[2], phonenumbers: [{owner: child[3], number: child[4]}, {owner: child[5], number: child[6]}], takenExtraLessons: parseInt(child[7]),
+                    name: child[8], birthdate: child[9], gender: child[10], groupNumber: parseInt(child[11]), packageNumber: parseInt(child[12]), svnr: child[13], extraLessonsAllowed: getBoolean(child[14]), maxExtraLessons: parseInt(child[15]), poolAllowed: getBoolean(child[16]), roomNumber: parseInt(child[17]),
+                    picture: getBoolean(child[18]), picturePayed: getBoolean(child[19]), allergen: child[20], vegetarian: getBoolean(child[21]), vegan: getBoolean(child[22]), extraDay: getBoolean(child[23]), foRiding: getBoolean(child[24]), afRiding: getBoolean(child[25]), jumping: getBoolean(child[26]), dressur: getBoolean(child[27]), note: child[28]
+                };
+            }
+        }
+    }
 
-    printChildrenList(children);
-    printRoomList(rooms);
-    printDetailedRoomList(rooms, true, children);
-    printHorseList(horses);
+    const xhttpRoom = new XMLHttpRequest();
+    xhttpRoom.open('POST', './php/getData.php', true);
+    xhttpRoom.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttpRoom.send('req=rooms');
 
+    let rooms = [];
+
+    xhttpRoom.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            rooms = JSON.parse(this.responseText);
+
+            for (let i = 0; i < rooms.length; i++) {
+                const room = rooms[i];
+                
+                rooms[i] = {
+                    number: parseInt(room[0]), capacity: parseInt(room[1]), unusedBeds: parseInt(room[2]), children: []
+                };
+            }
+        }
+    }
+
+    const xhttpHorse = new XMLHttpRequest();
+    xhttpHorse.open('POST', './php/getData.php', true);
+    xhttpHorse.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttpHorse.send('req=horses');
+
+    let horses = [];
+
+    xhttpHorse.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            horses = JSON.parse(this.responseText);
+
+            for (let i = 0; i < horses.length; i++) {
+                const horse = horses[i];
+                
+                horses[i] = {
+                    name: horse[0], id: horse[1], timetable: []
+                };
+            }
+        }
+    }
+    
     if (loggedIn === null) {
         localStorage.setItem('loggedIn', false);
         loggedIn = false;
@@ -103,6 +125,13 @@ window.addEventListener('load', () => {
 
     signInBtn.addEventListener('click', () => {
         activateLoading();
+
+        printChildrenList(children);
+        printRoomList(rooms);
+        printDetailedRoomList(rooms, true, children);
+        printHorseList(horses);
+        printDetailedHorseList(horses, true, children);
+        printSendFeedback(children);
 
         const username = document.getElementById('username');
         const password = document.getElementById('password');
@@ -163,6 +192,7 @@ window.addEventListener('load', () => {
                 // document.getElementById('usernameField').textContent = `Benutzername: ${username.value}`;
                 if (username.value === 'admin') printDetailedList(children, true);
                 else printDetailedList(children, false);
+                changeHeadline('Kinder');
             }, 1250);
             
             error.innerHTML = '&nbsp;';
@@ -173,6 +203,7 @@ window.addEventListener('load', () => {
     signOut.addEventListener('click', () => {
         menu.click();
         goToSpecificScreen(0);
+        headline.innerHTML = '&nbsp;'
 
         let wrapper = [
             document.getElementById('detailedChildrenScreen'),
@@ -206,15 +237,31 @@ window.addEventListener('load', () => {
         const contentWrapper = document.getElementById('contentWrapper');
         const menu = document.getElementById('menu');
 
-        document.getElementById('contentWrapper').scrollTo({
-            top: 0,
-            left: 0,
-        });
+        setTimeout(() => {
+            document.getElementById('contentWrapper').scrollTo({
+                top: 0,
+                left: 0,
+            });
+        }, 210);
 
         if (next) {
             currentScreen++;
         } else {
             currentScreen--;
+        }
+
+        const screens = [];
+
+        for (const child of contentWrapper.childNodes) {
+            if (child.localName === 'div') {
+                screens.push(child);
+            }
+        }
+
+        if (screens[currentScreen].className.includes('requiresScroll')) {
+            contentWrapper.style.overflowY = 'scroll';
+        } else {
+            contentWrapper.style.overflowY = 'hidden';
         }
 
         contentWrapper.style.left = `${(currentScreen * 100 * (-1))}vw`;
@@ -232,12 +279,12 @@ window.addEventListener('load', () => {
         const contentWrapper = document.getElementById('contentWrapper');
         const menu = document.getElementById('menu');
 
-        document.getElementById('contentWrapper').scrollTo({
-            top: 0,
-            left: 0,
-        });
-
-        if (screenIndex > contentWrapper.childNodes.length) screenIndex = contentWrapper.childNodes.length
+        setTimeout(() => {
+            document.getElementById('contentWrapper').scrollTo({
+                top: 0,
+                left: 0,
+            });
+        }, 210);
 
         currentScreen = screenIndex;
 
@@ -249,6 +296,20 @@ window.addEventListener('load', () => {
             }, 200);
         } else {
             menu.style.top = '-9vh';
+        }
+
+        const screens = [];
+
+        for (const child of contentWrapper.childNodes) {
+            if (child.localName === 'div') {
+                screens.push(child);
+            }
+        }
+
+        if (screens[currentScreen].className.includes('requiresScroll')) {
+            contentWrapper.style.overflowY = 'scroll';
+        } else {
+            contentWrapper.style.overflowY = 'hidden';
         }
 
         // hide all children details
@@ -407,7 +468,7 @@ window.addEventListener('load', () => {
 
             let infos = [{diplayText: 'Reitplan'}];
 
-            appendLinkToAnotherScreen(infos);
+            // appendLinkToAnotherScreen(infos);
 
             printDeleteChildButton();
 
@@ -433,6 +494,10 @@ window.addEventListener('load', () => {
                     newRow.appendChild(icon);
                     newChild.appendChild(newRow);
                 }
+            }
+
+            function printChildrenSpecificRidingPlan(horses) {
+                // TODO
             }
 
             function printPhoneNumbers() {
@@ -622,7 +687,7 @@ window.addEventListener('load', () => {
 
     function printDetailedRoomList(rooms, hasWritePermission, children) {
         const contentWrapper = document.getElementById('roomsScreen');
-
+        
         for (let i = 0; i < rooms.length; i++) {
             const room = rooms[i];
 
@@ -707,6 +772,7 @@ window.addEventListener('load', () => {
                 iconWrapper.appendChild(gender);
                 li.appendChild(name);
                 li.appendChild(iconWrapper);
+
                 return li;
             }
 
@@ -737,6 +803,7 @@ window.addEventListener('load', () => {
                 iconWrapper.appendChild(gender);
                 li.appendChild(name);
                 li.appendChild(iconWrapper);
+
                 return li;
             }
 
@@ -792,7 +859,7 @@ window.addEventListener('load', () => {
     function printDetailedHorseList(horses, hasWritePermission, children) {
         const contentWrapper = document.getElementById('detailedRidingPlan');
 
-        for (let i = 0; i < horses; i++) {
+        for (let i = 0; i < horses.length; i++) {
             const horse = horses[i];
 
             const newDetailedHorse = document.createElement('div');
@@ -803,14 +870,142 @@ window.addEventListener('load', () => {
             horseName.textContent = horse.name;
 
             headline.appendChild(horseName);
+            headline.classList.add('detailedHorseHeadliner');
+
+            newDetailedHorse.appendChild(headline);
 
             // create Session Selection
             for (let i = 1; i <= 7; i++) {
                 const dayRow = document.createElement('div');
 
-                               
+                const headlineWrapper = document.createElement('div');
+                const day = document.createElement('h3');
+                day.textContent = `Tag ${i}:`;
+                headlineWrapper.appendChild(day);
+
+                dayRow.appendChild(headlineWrapper);
+                
+                const sessions = [
+                    {from: "08:15", till: "09:00"},
+                    {from: "09:00", till: "09:45"},
+                    {from: "09:45", till: "10:30"},
+                    {from: "10:30", till: "11:15"},
+                    {from: "11:15", till: "12:00"},
+                    {from: "13:00", till: "13:45"},
+                    {from: "13:45", till: "14:30"},
+                    {from: "14:30", till: "15:15"},
+                    {from: "15:15", till: "16:00"},
+                    {from: "16:00", till: "16:45"},
+                ];
+
+                for (let j = 0; j < sessions.length; j++) {
+                    const session = sessions[j];
+
+                    const sessionWrapper = document.createElement('div');
+
+                    const time = document.createElement('p');
+                    time.textContent = `${session.from} - ${session.till} Uhr`;
+
+                    sessionWrapper.appendChild(time);
+
+                    const select = document.createElement('select');
+
+                    for (const child of children) {
+                        const option = document.createElement('option');
+                        option.textContent = child.name;
+                        select.appendChild(option);
+                    }
+
+                    const select2 = document.createElement('select');
+                    const activities = [
+                        "Springen",
+                        "Dressur",
+                        "Ausritt",
+                    ];
+
+                    for (const activity of activities) {
+                        const option = document.createElement('option');
+                        option.textContent = activity;
+                        select2.appendChild(option);
+                    }
+
+                    sessionWrapper.classList.add('session')
+                    sessionWrapper.appendChild(select);
+                    sessionWrapper.appendChild(select2);
+                    dayRow.appendChild(sessionWrapper);
+                }
+
+                newDetailedHorse.appendChild(dayRow);
             }
+
+            newDetailedHorse.setAttribute('class', 'hide detailedHorsePlan');
+
+            detailedHorseHammer = new Hammer(newDetailedHorse);
+
+            detailedHorseHammer.on('swiperight', () => {
+                changeScreen(false);
+                newDetailedHorse.classList.add('hide');
+            });
+
+            contentWrapper.appendChild(newDetailedHorse);
         }
+    }
+
+    function printSendFeedback(children) {
+        const contentWrapper = document.getElementById('sendFeedbackScreen');
+        const btns = [];
+
+        const headlineWrapper = document.createElement('div');
+        
+
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i];
+
+            const newChild = document.createElement('div');
+
+            const name = document.createElement('p');
+            name.textContent = child.name;
+
+            const sendButton = document.createElement('div');
+            sendButton.textContent = 'Senden';
+            sendButton.setAttribute('class', 'feedbackButton');
+
+            sendButton.addEventListener('click', () => {
+                sendButton.style.opacity = 0.5;
+            });
+
+            btns.push(sendButton);
+
+            newChild.setAttribute('class', 'feedbackChild');
+            newChild.appendChild(name);
+            newChild.appendChild(sendButton);
+            contentWrapper.appendChild(newChild);
+        }
+
+        const sendAllWrapper = document.createElement('div');
+        const sendAllButton = document.createElement('div');
+        sendAllButton.textContent = 'Allen Senden';
+        sendAllButton.setAttribute('class', 'feedbackButton');
+
+        sendAllButton.addEventListener('click', () => {
+            for (const btn of btns) {
+                btn.style.opacity = .5;
+                sendAllButton.style.opacity = .5;
+            }
+        });
+
+        sendAllWrapper.setAttribute('class', 'feedbackChild');
+        sendAllWrapper.appendChild(sendAllButton);
+        contentWrapper.appendChild(sendAllWrapper);
+    }
+
+    function changeHeadline(newText) {
+        headline.style.opacity = 0;
+
+        setTimeout(() => {
+            headline.textContent = newText;
+            headline.style.opacity = 1;
+        }, 200);
     }
 
     detailedHammer.on('swiperight', () => {
@@ -819,6 +1014,7 @@ window.addEventListener('load', () => {
 
     roomPlaningHammer.on('swiperight', () => {
         goToSpecificScreen(1);
+        changeHeadline('Kinder');
     });
 
     roomHammer.on('swiperight', () => {
@@ -830,4 +1026,24 @@ window.addEventListener('load', () => {
             }
         }, 260);
     });
+
+    horseListHammer.on('swiperight', () => {
+        goToSpecificScreen(1);
+        changeHeadline('Kinder');
+    });
+
+    sendFeedBackHammer.on('swiperight', () => {
+        goToSpecificScreen(1);
+        changeHeadline('Kinder');
+    });
 });
+
+function getBoolean(string) {
+    if (string === 'true') {
+        return true;
+    } else if (string === 'false') {
+        return false;
+    } else {
+        return undefined;
+    }
+}
