@@ -8,15 +8,19 @@
     <link rel="stylesheet" href="./style/menu.css">
     <link rel="stylesheet" href="./style/main.css">
     <link rel="stylesheet" href="./style/room.css">
+    <link rel="stylesheet" href="./style/about.css">
     <link rel="stylesheet" href="./style/logIn.css">
     <link rel="stylesheet" href="./style/loading.css">
     <link rel="stylesheet" href="./style/children.css">
+    <link rel="stylesheet" href="./style/feedback.css">
     <link rel="stylesheet" href="./style/ridingplan.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     <script src="./script/menu.js"></script>
+    <script src="./script/room.js"></script>
+    <script src="./script/horse.js"></script>
     <script src="./script/script.js"></script>
     <script src="./script/hammer.min.js"></script>
 </head>
@@ -28,8 +32,8 @@
             <li id="childrenNav">Kinder</li>
             <li id="roomPlaningNav">Zimmer Einteilung</li>
             <li id="ridingPlanNav">Reitplan</li>
-            <li>Feedbackfragebögen</li>
-            <li>Account</li>
+            <li id="feedBackNav">Feedbackfragebögen</li>
+            <!-- <li>Account</li> -->
         </ul>
 
         <i class="fas fa-sign-out-alt" id="signOut"></i>
@@ -42,6 +46,8 @@
         <div class="bar" id="barTwo"></div>
         <div class="bar" id="barThree"></div>
     </div>
+
+    <h1 id="headline">&nbsp;</h1>
 
     <div id="contentWrapper">
         <div id="logInScreen">
@@ -68,11 +74,11 @@
             </div>
         </div>
 
-        <div id="childrenScreen" class="hideOverflow"></div>
+        <div id="childrenScreen"></div>
 
-        <div id="detailedChildrenScreen"></div>
+        <div id="detailedChildrenScreen" class="requiresScroll"></div>
 
-        <div id="childrenRidingPlanScreen">
+        <div id="childrenRidingPlanScreen" class="requiresScroll">
             <h2>hier wird der Reitplan des ausgewählten kindes ansehbar sein</h2>
 
             <button id="back">back</button>
@@ -84,7 +90,9 @@
 
         <div id="ridingPlan"></div>
 
-        <div id="detailedRidingPlan"></div>
+        <div id="detailedRidingPlan" class="requiresScroll"></div>
+
+        <div id="sendFeedbackScreen"></div>
     </div>
 </body>
 </html>
