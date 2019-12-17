@@ -24,6 +24,19 @@ body {
     color: red;
 }
 
+#headline {
+    width: 82vw;
+    height: 6vh;
+    position: absolute;
+    top: 1.25vh;
+    right: 1vw;
+    margin: 0;
+    font-size: 7vmin;
+    display: flex;
+    align-items: center;
+    transition: opacity 200ms ease-in-out;
+}
+
 .button {
     border: 2px solid #353535;
     border-radius: 7px;
