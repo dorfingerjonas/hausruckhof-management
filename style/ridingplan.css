@@ -13,3 +13,23 @@
 .selectionHorse p, .detailedHorseRow p {
     margin: 0;
 }
+
+.detailedHorsePlan {
+    width: 90vw;
+    padding: 0 5vw;
+}
+
+.detailedHorseHeadliner h2 {
+    margin: 0;
+}
+
+.detailedHorsePlan select {
+    border: none;
+    border-bottom: 1.5px solid #353535;
+    margin: 0 5vmin 0 0;
+    outline: none;
+}
+
+.session {
+    margin: 0 0 15vmin 0;
+}
