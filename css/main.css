@@ -1,0 +1,114 @@
+/* General */
+html {
+    overflow: hidden;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+.hide {
+    display: none !important;
+}
+
+.hideOverflow {
+    overflow: hidden !important;
+}
+
+.error {
+    color: red;
+}
+
+#headline {
+    width: 82vw;
+    height: 6vh;
+    position: absolute;
+    top: 1.25vh;
+    right: 1vw;
+    margin: 0;
+    font-size: 7vmin;
+    display: flex;
+    align-items: center;
+    transition: opacity 200ms ease-in-out;
+}
+
+.button {
+    border: 2px solid #353535;
+    border-radius: 7px;
+    padding: 3vmin;
+    width: auto;
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+}
+
+/* Navigation */
+#nav {
+    width: 100vw;
+    height: 100vh;
+    background: #242424ed; 
+    position: fixed;
+    top: -110vh;
+    left: 0;
+    transition: all 600ms ease-in-out;
+    z-index: 1;
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    user-select: none;
+}
+
+#nav ul {
+    font-size: 7vmin;
+    height: 40vh;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+nav i {
+    position: absolute;
+    bottom: 20vh;
+    font-size: 7vmin;
+    transform: rotateZ(180deg);
+}
+
+nav span {
+    position: absolute;
+    bottom: 10vh;
+}
+
+nav p {
+    position: absolute;
+    top: 15vh;
+}
+
+/* Contentwrapper */
+#contentWrapper {
+    width: 100vw;
+    min-height: 90vh;
+    position: relative;
+    top: 10vh;
+    left: 0vw;
+    text-align: justify;
+    z-index: 0;
+    float: left;
+    overflow-x: hidden;
+}
+
+#contentWrapper > div {
+    width: 100vw;
+    height: 90vh;
+}
+
+#contentWrapper p {
+    margin-top: 0;
+}
