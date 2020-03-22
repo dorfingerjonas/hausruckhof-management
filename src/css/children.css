@@ -1,0 +1,41 @@
+.child {
+    width: 92%;
+    height: 7vh;
+    margin: 2vh 0;
+    padding: 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    box-shadow: 1px 1px 9px 0px #dbdbdb;
+}
+
+.child h1, .child p {
+    margin: 0;
+}
+
+.personDataWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.iconWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 7vw;
+}
+
+.iconWrapper i {
+    margin: 0 1vw;
+}
+
+.iconWrapper i:nth-child(1) {
+    color: #0070e1;
+}
+
+.iconWrapper i:nth-child(2) {
+    color: #db3232;
+}
