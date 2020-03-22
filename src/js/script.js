@@ -191,3 +191,13 @@ function getBoolean(string) {
         return undefined;
     }
 }
+
+function removeAllChildren(wrapper) {
+    if (typeof wrapper === 'string') {
+        wrapper = document.getElementById(wrapper);
+    }
+
+    while (wrapper.firstChild) {
+        wrapper.removeChild(wrapper.firstChild);
+    }
+}
