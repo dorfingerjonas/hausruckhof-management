@@ -40,4 +40,20 @@ app.post('/login', (req, respond) => {
     }).catch(e => console.error(e.message));
 });
 
+app.get('/children', (respond) => {  
+  respond.set('Access-Control-Allow-Origin', '*');
+  respond.set('Access-Control-Allow-Headers', 'Content-Type');
+  respond.header("Content-Type",'application/json');
+  
+  client
+    .query('SELECT * FROM child')
+    .then((res) => {
+      if (res.rowCount > 0) {        
+        respond.send(res.rows);
+      } else {
+        respond.send(false);
+      }
+    }).catch(e => console.error(e.message));
+});
+
 app.listen(80, console.log('Listening on port 80'));
