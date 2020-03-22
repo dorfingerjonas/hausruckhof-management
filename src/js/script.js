@@ -95,6 +95,7 @@ window.addEventListener('load', () => {
                 if (getBoolean(e.target.responseText)) {
                     changeHeadline('Kinder');
                     goToScreen('childrenScreen');
+                    requestChildren();
                     
                     error.innerHTML = '&nbsp;';
                 } else {
@@ -154,11 +155,30 @@ window.addEventListener('load', () => {
     function goToScreen(screenId) {
         let boxToShow;
 
-        for (const box of contentWrapper.children) {
+        for (const box of screenContentWrapper.children) {
             box.id === screenId ? boxToShow = box : box.classList.add('hide');
         }
 
         boxToShow.classList.remove('hide');
+    }
+
+    function requestChildren() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://localhost/children', true);
+        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.addEventListener('load', (e) => {                
+            if (e.target.responseText !== 'false') {
+                printChildren(e.target.responseText);
+            }
+        });
+
+        xhr.send();
+    }
+
+    function printChildren(children) {
+        
     }
 });
 
