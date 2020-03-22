@@ -96,6 +96,7 @@ window.addEventListener('load', () => {
                     changeHeadline('Kinder');
                     goToScreen('childrenScreen');
                     requestChildren();
+                    menu.classList.remove('hide');
                     
                     error.innerHTML = '&nbsp;';
                 } else {
@@ -112,23 +113,15 @@ window.addEventListener('load', () => {
 
     signOut.addEventListener('click', () => {
         menu.click();
-        goToSpecificScreen(0);
-        headline.innerHTML = '&nbsp;'
+        goToScreen('logInScreen');
 
-        let wrapper = [
-            document.getElementById('detailedChildrenScreen'),
-            document.getElementById('childrenScreen'),
-        ];
-
-        for (const box of wrapper) {
-            while (box.firstChild) {
-                box.removeChild(box.firstChild);
-            }
-        }
+        setTimeout(() => {
+            headline.innerHTML = '&nbsp;'
+            menu.classList.add('hide');
+            removeAllChildren('childrenScreen');
+        }, 600);
 
         // document.getElementById('usernameField').innerHTML = '&nbsp;'
-
-        printChildrenList(children);
     });
 
     function activateLoading() {
@@ -170,7 +163,7 @@ window.addEventListener('load', () => {
 
         xhr.addEventListener('load', (e) => {                
             if (e.target.responseText !== 'false') {
-                printChildren(e.target.responseText);
+                printChildren(JSON.parse(e.target.responseText));
             }
         });
 
@@ -178,7 +171,40 @@ window.addEventListener('load', () => {
     }
 
     function printChildren(children) {
-        
+        const contentWrapper = document.getElementById('childrenScreen');
+
+        for (let i = 0; i < children.length; i++) {
+            const newChild = document.createElement('div');
+            const child = children[i];
+            const personalDataWrapper = document.createElement('div');
+
+            const name = document.createElement('h1');
+            const birthday = document.createElement('p');
+
+            name.textContent = `${child.first_name} ${child.last_name}`;
+            const date = new Date(child.birthday);
+            birthday.textContent = `geboren am ${('0' + date.getDate()).slice(-2)}.${('0' + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()}`;
+
+            const iconWrapper = document.createElement('div');
+            const editIcon = document.createElement('i');
+            const deleteIcon = document.createElement('i');
+
+            editIcon.setAttribute('class', 'fas fa-user-edit');
+            deleteIcon.setAttribute('class', 'fas fa-user-times');
+
+            iconWrapper.appendChild(editIcon);
+            iconWrapper.appendChild(deleteIcon);
+            iconWrapper.classList.add('iconWrapper');
+
+            personalDataWrapper.appendChild(name);
+            personalDataWrapper.appendChild(birthday);
+            personalDataWrapper.classList.add('personDataWrapper');
+
+            newChild.appendChild(personalDataWrapper);
+            newChild.appendChild(iconWrapper);
+            newChild.classList.add('child');
+            contentWrapper.appendChild(newChild);
+        }
     }
 });
 
