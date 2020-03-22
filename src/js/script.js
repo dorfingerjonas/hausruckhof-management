@@ -1,5 +1,5 @@
 window.addEventListener('load', () => {
-    const contentWrapper = document.getElementById('contentWrapper');
+    const screenContentWrapper = document.getElementById('contentWrapper');
     const signInBtn = document.getElementById('logInBtn');
     const signOut = document.getElementById('signOut');
     const menu = document.getElementById('menu');
