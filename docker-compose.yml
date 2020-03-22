@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+    node:
+        build: .
+        restart: always
+        command: npm run start-dev
+        volumes:
+            - .:/usr/src/app/
+            - /usr/src/app/node_modules
+        ports:
+            - 80:80
+        depends_on:
+            - postgres
+        environment:
+            - PGUSER=${POSTGRES_USER}
+            - PGPASSWORD=${POSTGRES_PASSWORD}
+            - PGHOST=postgres
+            - PGDATABASE=${POSTGRES_DB}
+            - PGPORT=5432
+
+    postgres:
+        image: postgres:12.2
+        restart: always
+        volumes:
+            - ./postgres/init:/docker-entrypoint-initdb.d
+        environment:
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - POSTGRES_DB=${POSTGRES_DB}
