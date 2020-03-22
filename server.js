@@ -40,7 +40,7 @@ app.post('/login', (req, respond) => {
     }).catch(e => console.error(e.message));
 });
 
-app.get('/children', (respond) => {  
+app.get('/children', (req, respond) => {  
   respond.set('Access-Control-Allow-Origin', '*');
   respond.set('Access-Control-Allow-Headers', 'Content-Type');
   respond.header("Content-Type",'application/json');
