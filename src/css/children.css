@@ -1,3 +1,29 @@
+#childrenSearchBar {
+    width: 92%;
+    padding: 0 4%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#childrenSearchInput {
+    width: 85%;
+    border: none;
+    border-bottom: 2px solid lightgray;
+    padding: 1vh 1vw;
+    font-size: 4vw;
+    outline: none;
+    transition: border-color 200ms ease-in-out;
+}
+
+#childrenSearchInput:focus {
+    border-color: cornflowerblue;
+}
+
+#childrenSearchBtn {
+    margin: 0 0 0 3vw;
+}
+
 .child {
     width: 92%;
     height: 7vh;
