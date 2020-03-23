@@ -4,6 +4,7 @@ window.addEventListener('load', () => {
     const signOut = document.getElementById('signOut');
     const menu = document.getElementById('menu');
     const headline = document.getElementById('headline');
+
     // Nav
     const childrenNav = document.getElementById('childrenNav');
     const roomPlaning = document.getElementById('roomPlaningNav');
@@ -171,7 +172,7 @@ window.addEventListener('load', () => {
     }
 
     function printChildren(children) {
-        const contentWrapper = document.getElementById('childrenScreen');
+        const contentWrapper = document.getElementById('childrenWrapper');
 
         for (let i = 0; i < children.length; i++) {
             const newChild = document.createElement('div');
@@ -204,7 +205,27 @@ window.addEventListener('load', () => {
             newChild.appendChild(iconWrapper);
             newChild.classList.add('child');
             contentWrapper.appendChild(newChild);
+
+            children[i].element = newChild;
         }
+
+        initSearch(children);
+    }
+
+    function initSearch(children) {
+        const input = document.getElementById('childrenSearchInput');
+
+        childrenSearchInput.addEventListener('input', () => {
+            for (const child of children) {
+                const name = `${child.first_name} ${child.last_name}`.toLocaleLowerCase();
+                
+                if (name.includes(input.value.toLowerCase())) {
+                    child.element.style.display = '';
+                } else {
+                    child.element.style.display = 'none';
+                }
+            }
+        });
     }
 });
 
