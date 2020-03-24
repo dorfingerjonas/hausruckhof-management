@@ -248,6 +248,7 @@ window.addEventListener('load', () => {
         const phonenumber2 = document.getElementById('phonenumber2');
         const phonenumber2_owner = document.getElementById('phonenumber2_owner');
         const allergens = document.getElementById('allergens');
+        const gender = document.getElementsByName('gender');
 
         first_name.value = values.first_name;
         last_name.value = values.last_name;
@@ -263,6 +264,18 @@ window.addEventListener('load', () => {
         phonenumber2.value = values.phonenumber2;
         phonenumber2_owner.value = values.phonenumber2_owner;
         allergens.value = values.allergens;
+
+        if (values.gender !== null) {
+            values.gender = values.gender.toLowerCase();
+
+            if (values.gender === 'männlich') {
+                gender[0].checked = true;
+            } else if (values.gender === 'weiblich') {
+                gender[1].checked = true;
+            } else if (values.gender === 'divers') {
+                gender[2].checked = true;
+            }
+        }
     }
 });
 
