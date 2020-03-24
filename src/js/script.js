@@ -193,6 +193,11 @@ window.addEventListener('load', () => {
             editIcon.setAttribute('class', 'fas fa-user-edit');
             deleteIcon.setAttribute('class', 'fas fa-user-times');
 
+            editIcon.addEventListener('click', () => {
+                addChildDetailValues(child);
+                goToScreen('childDetailsScreen');
+            });
+
             iconWrapper.appendChild(editIcon);
             iconWrapper.appendChild(deleteIcon);
             iconWrapper.classList.add('iconWrapper');
