@@ -43,3 +43,15 @@
     font-size: 5vw;
     margin: 1vh 0 0 2vw;
 }
+
+#saveChildButton {
+    width: 74%;
+    margin: 7% 10% 5%;
+    padding: 1.3vh 3%;
+    border-radius: 4px;
+    background: #42b983;
+    color: #fff;
+    font-size: 5vw;
+    text-align: center;
+    outline: none;
+}
