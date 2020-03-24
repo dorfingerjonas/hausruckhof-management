@@ -54,4 +54,5 @@
     font-size: 5vw;
     text-align: center;
     outline: none;
+    user-select: none;
 }

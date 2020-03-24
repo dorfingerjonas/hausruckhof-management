@@ -4,6 +4,7 @@ window.addEventListener('load', () => {
     const signOut = document.getElementById('signOut');
     const menu = document.getElementById('menu');
     const headline = document.getElementById('headline');
+    const saveChildButton = document.getElementById('saveChildButton');
 
     // Nav
     const childrenNav = document.getElementById('childrenNav');
@@ -123,6 +124,14 @@ window.addEventListener('load', () => {
         }, 600);
 
         // document.getElementById('usernameField').innerHTML = '&nbsp;'
+    });
+
+    saveChildButton.addEventListener('click', () => {
+        const inputs = document.getElementById('privateDataWrapper').getElementsByTagName('input');
+
+        for (const input of inputs) {
+            
+        }
     });
 
     function activateLoading() {
