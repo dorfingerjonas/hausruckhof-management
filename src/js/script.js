@@ -227,6 +227,38 @@ window.addEventListener('load', () => {
             }
         });
     }
+
+    function addChildDetailValues(values) {
+        const first_name = document.getElementById('first_name');
+        const last_name = document.getElementById('last_name');
+        const birthday = document.getElementById('birthday');
+        const svnr = document.getElementById('svnr');
+        const street = document.getElementById('street');
+        const housenumber = document.getElementById('housenumber');
+        const post_code = document.getElementById('post_code');
+        const place_name = document.getElementById('place_name');
+        const email = document.getElementById('email');
+        const phonenumber1 = document.getElementById('phonenumber1');
+        const phonenumber1_owner = document.getElementById('phonenumber1_owner');
+        const phonenumber2 = document.getElementById('phonenumber2');
+        const phonenumber2_owner = document.getElementById('phonenumber2_owner');
+        const allergens = document.getElementById('allergens');
+
+        first_name.value = values.first_name;
+        last_name.value = values.last_name;
+        birthday.value = values.birthday.substring(0, 10);
+        svnr.value = values.svnr;
+        street.value = values.street;
+        housenumber.value = values.housenumber;
+        post_code.value = values.post_code;
+        place_name.value = values.place_name;
+        email.value = values.email;
+        phonenumber1.value = values.phonenumber1;
+        phonenumber1_owner.value = values.phonenumber1_owner;
+        phonenumber2.value = values.phonenumber2;
+        phonenumber2_owner.value = values.phonenumber2_owner;
+        allergens.value = values.allergens;
+    }
 });
 
 function getBoolean(string) {
