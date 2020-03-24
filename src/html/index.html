@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="logIn.css">
     <link rel="stylesheet" href="children.css">
     <link rel="stylesheet" href="loading.css">
+    <link rel="stylesheet" href="childDetails.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -26,7 +27,6 @@
             <li id="roomPlaningNav">Zimmer Einteilung</li>
             <li id="ridingPlanNav">Reitplan</li>
             <li id="feedBackNav">Feedbackfragebögen</li>
-            <!-- <li>Account</li> -->
         </ul>
 
         <i class="fas fa-sign-out-alt" id="signOut"></i>
@@ -78,6 +78,75 @@
             </div>
 
             <div id="childrenWrapper"></div>
+        </div>
+
+        <div id="childDetailsScreen" class="hide">
+            <header>
+                <i class="fas fa-arrow-left"></i>
+            </header>
+
+            <div id="childWrapper">
+                <h3>persönliche Daten</h3>
+
+                <div id="privateDataWrapper">
+                    <label>Vorname *</label>
+                    <input type='text' id='first_name' placeholder='Vorname'>
+
+                    <label>Nachname *</label>
+                    <input type='text' id='last_name' placeholder='Nachname'>
+
+                    <label>Geburtstdatum *</label>
+                    <input type='date' id='birthday'>
+
+                    <label>Sozialversicherungsnummer *</label>
+                    <input type='text' id='svnr' placeholder='Sozialversicherungsnummer'>
+
+                    <label>Straße</label>
+                    <input type='text' id='street' placeholder='Straße'>
+
+                    <label>Hausnummer</label>
+                    <input type='text' id='housenumber' placeholder='Hausnummer'>
+
+                    <label>PLZ</label>
+                    <input type='number' id='post_code' placeholder='PLZ'>
+
+                    <label>Ort</label>
+                    <input type='text' id='place_name' placeholder='Ort'>
+
+                    <label>Geschlecht</label>
+                    <div id="genderWrapper">
+                        <input type="radio" name="gender" id="" value="männlich">
+                        <span>männlich</span>
+
+                        <br>
+
+                        <input type="radio" name="gender" id="" value="weiblich">
+                        <span>weiblich</span>
+
+                        <br>
+
+                        <input type="radio" name="gender" id="" value="divers"><span>divers</span>
+                    </div>
+
+                    <label>E-Mail Adresse Elternteil</label>
+                    <input type='email' id='email' placeholder='E-Mail Adresse Elternteil'>
+
+                    <label>Telefonnummer 1</label>
+                    <input type='text' id='phonenumber1' placeholder='Telefonnummer 1'>
+
+                    <label>Telefonnummer 1 - Besitzer</label>
+                    <input type='text' id='phonenumber1_owner' placeholder='Telefonnummer 1 - Besitzer'>
+
+                    <label>Telefonnummer 2</label>
+                    <input type='text' id='phonenumber2' placeholder='Telefonnummer 2'>
+
+                    <label>Telefonnummer 2 - Besitzer</label>
+                    <input type='text' id='phonenumber2_owner' placeholder='Telefonnummer 2 - Besitzer'>
+
+                    <label>Allergene</label>
+                    <input type='text' id='allergens' placeholder='Allergene'>
+                </div>
+            </div>
         </div>
     </div>
 </body>
