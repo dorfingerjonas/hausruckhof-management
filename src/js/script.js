@@ -307,3 +307,13 @@ function removeAllChildren(wrapper) {
         wrapper.removeChild(wrapper.firstChild);
     }
 }
+
+function getSelectedGender(inputs) {
+    for (const input of inputs) {
+        if (input.type === 'radio') {
+            if (input.checked) {
+                return input.value
+            }
+        }
+    }
+}
