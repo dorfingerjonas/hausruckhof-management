@@ -129,8 +129,45 @@ window.addEventListener('load', () => {
     saveChildButton.addEventListener('click', () => {
         const inputs = document.getElementById('privateDataWrapper').getElementsByTagName('input');
 
-        for (const input of inputs) {
-            
+        let isValid = true;
+
+        for (let i = 0; i < 4; i++) {
+            if (inputs[i].value.trim() === '') {
+                isValid = false;
+            }
+        }
+
+        if (isValid) {
+            const data = {
+                'first_name': inputs[0].value,
+                'last_name': inputs[1].value,
+                'birthday': inputs[2].value,
+                'svnr': inputs[3].value,
+                'street': inputs[4].value,
+                'housenumber': inputs[5].value,
+                'post_code': parseInt(inputs[6].value),
+                'place_name': inputs[7].value,
+                'gender': getSelectedGender(inputs),
+                'email': inputs[11].value,
+                'phonenumber1': inputs[12].value,
+                'phonenumber1_owner': inputs[13].value,
+                'phonenumber2': inputs[14].value,
+                'phonenumber2_owner': inputs[15].value,
+                'allergens': inputs[16].value,
+            };
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost/updateChild', true);
+            xhr.setRequestHeader('Accept', 'application/json');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.addEventListener('load', (e) => {                
+                console.log(e.target.responseText);
+            });
+
+            xhr.send(JSON.stringify(data));
+        } else {
+            console.log('invalid');
         }
     });
 
