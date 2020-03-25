@@ -1,3 +1,14 @@
+#childDetailsScreen header i {
+    padding: 4vw;
+    border-radius: 25%;
+    font-size: 5.5vw;
+    transition: background 200ms ease-in-out;
+}
+
+#childDetailsScreen header i:hover {
+    background: #d3d3d380;
+}
+
 #privateDataWrapper {
     display: flex;
     flex-direction: column;
